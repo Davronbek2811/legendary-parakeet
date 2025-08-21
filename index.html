@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title data-key="site_title">Fitnes Liga — Premium</title>
+    <link rel="icon" href="./img/logo.PNG">
+    <meta name="description" data-key="meta_description"
+        content="Fitnes Liga — Cheksiz tashriflar, trener bilan 1 ta sinov darsi, yoga darsi sovg'a. Premium dizayn, AOS animatsiya va mobil menyu." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        :root {
+            --yellow-1: #ffe047;
+            --yellow-2: #ffc107;
+            --bg: #0b0b0b;
+            --card: #0f0f0f;
+        }
+
+        .brand-gradient {
+            background-image: linear-gradient(135deg, var(--yellow-1), var(--yellow-2));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .glass {
+            background: rgba(18, 18, 18, .6);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yellow-1), var(--yellow-2));
+            border-radius: 2px;
+            transition: width .35s cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .card-premium {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .card-premium::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            padding: 1.5px;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #222, #222) padding-box, linear-gradient(135deg, var(--yellow-1), var(--yellow-2)) border-box;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+        }
+
+        .card-inner {
+            position: relative;
+            border-radius: calc(1rem - 2px);
+            background: var(--card);
+        }
+
+        .shine {
+            position: absolute;
+            inset: -40%;
+            background: conic-gradient(from 180deg at 50% 50%, transparent, rgba(255, 224, 71, .12), transparent 30%);
+            transform: rotate(0deg);
+            transition: transform .9s ease;
+            pointer-events: none;
+        }
+
+        .card-premium:hover .shine {
+            transform: rotate(25deg);
+        }
+
+        .btn-grad {
+            transition: transform .28s ease, box-shadow .28s ease;
+        }
+
+        .btn-grad:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 32px rgba(255, 193, 7, .16);
+        }
+
+        .btn-grad:active {
+            transform: translateY(1px) scale(.995);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-panel {
+            transform-origin: top;
+            transition: transform .35s ease, opacity .35s ease;
+        }
+
+        .mobile-panel.closed {
+            transform: scaleY(.95);
+            opacity: 0;
+            height: 0;
+            pointer-events: none;
+        }
+
+        .mobile-panel.open {
+            transform: scaleY(1);
+            opacity: 1;
+            height: auto;
+            pointer-events: auto;
+        }
+
+        .lang-btn {
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background-color: #facc15;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(255, 230, 0, 0.6);
+        }
+
+        .lang-btn:not(.active) {
+            background-color: #1f2937;
+            color: white;
+        }
+
+        .gradient {
+            background: #b43a3a;
+            background: linear-gradient(90deg, rgba(180, 58, 58, 1) 0%, rgba(253, 201, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+        }
+
+
+
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-link::after,
+            .btn-grad,
+            .shine,
+            .reveal,
+            .mobile-panel {
+                transition: none !important;
+            }
+        }
+
+        @media (max-width:640px){
+            footer div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#0b0b0b] text-white antialiased">
+
+    <header class="fixed py-[13px] inset-x-0 top-0 z-50 glass border-b border-white/6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-16 flex items-center justify-between gap-4">
+                <a href="./index.html"><img src="./img/logo.PNG" class="w-[80px] h-[80px]" alt=""></a>
+
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a class="nav-link hover:text-yellow-500 transition duration-300" href="#home" data-key="home">Bosh sahifa</a>
+                    <a class="nav-link hover:text-yellow-500 transition duration-300" href="./main.html" data-key="about">Biz haqimizda</a>
+                    <a class="nav-link hover:text-yellow-500 transition duration-300" href="#services" data-key="services">Xizmatlar</a>
+                    <a class="nav-link hover:text-yellow-500 transition duration-300" href="#prices" data-key="prices">Narxlar</a>
+                    <a class="nav-link hover:text-yellow-500 transition duration-300" href="#contact" data-key="contact">Aloqa</a>
+                </nav>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <button id="btnUZ" class="lang-btn px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold active">UZ</button>
+                    <button id="btnRU" class="lang-btn px-3 py-1 rounded-md bg-gray-800 text-white">RU</button>
+                </div>
+
+                <div class="md:hidden flex items-center gap-2">
+                    <div class="hidden sm:flex">
+                        <button id="btnUZ_m" class="px-2 py-1 rounded-md bg-yellow-400 text-black text-sm">UZ</button>
+                        <button id="btnRU_m" class="px-2 py-1 rounded-md bg-gray-800 text-white text-sm ml-2">RU</button>
+                    </div>
+
+                    <button id="hamburger" aria-label="Open menu" class="p-2 rounded-md border border-white/10">
+                        <svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobilePanel" class="mobile-panel closed md:hidden overflow-hidden mt-2 mb-3">
+                <div class="grid gap-2 px-2 pb-3">
+                    <a class="block px-3 py-2 rounded-md nav-link" href="./index.html" data-key="home_m">Bosh sahifa</a>
+                    <a class="block px-3 py-2 rounded-md nav-link" href="./main.html" data-key="home_m">Biz haqimizda</a>
+                    <a class="block px-3 py-2 rounded-md nav-link" href="#services" data-key="home_m">Xizmatlar</a>
+                    <a class="block px-3 py-2 rounded-md nav-link" href="#prices" data-key="home_m">Narxlar</a>
+                    <a class="block px-3 py-2 rounded-md nav-link" href="#contact" data-key="home_m">Aloqa</a>
+                    <div class="flex items-center gap-2 px-3 mt-2">
+                        <button id="btnUZ_mobile" class="px-3 py-1 rounded-md bg-yellow-400 text-black font-semibold">UZ</button>
+                        <button id="btnRU_mobile" class="px-3 py-1 rounded-md bg-gray-800 text-white">RU</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <section id="home" class="min-h-[70vh] flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+                <div data-aos="fade-right" data-aos-duration="900" data-aos-easing="ease-out-cubic">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight" data-key="hero_title">Premium <span class="brand-gradient">Fitness</span> tajribasi</h1>
+                    <p class="mt-4 text-white/75 max-w-xl" data-key="hero_sub">Cheksiz tashriflar, trener bilan 1 ta sinov darsi va yoga darsi — barchasi bir abonementda.</p>
+                    <div class="mt-6 flex gap-3">
+                        <a href="#prices" class="btn-grad px-5 py-3 rounded-xl bg-yellow-400 text-black font-semibold" data-key="btn_abon">Abonementlar</a>
+                        <a href="#services" class="px-5 py-3 rounded-xl border border-white/10 text-white/90" data-key="btn_services">Xizmatlar</a>
+                    </div>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden h-72 sm:h-96" data-aos="zoom-in" data-aos-duration="900">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,224,71,.18),transparent_55%)]"></div>
+                    <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" alt="gym" class="w-full h-full object-cover opacity-95" />
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold brand-gradient" data-key="about_title">Biz haqimizda</h2>
+                <p class="mt-4 text-white/75 max-w-3xl" data-key="about_text"><span class="text-yellow-500">Fitnes Liga</span> — zamonaviy fitnes markazi. Biz sizga individual yondashuv, professional trenerlar va qulay infrastrukturani taklif qilamiz.</p>
+            </div>
+        </section>
+
+        <section class="py-12 bg-[#0f0f0f]" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+                <div class="card-premium p-6 reveal" data-aos="fade-up" data-aos-delay="80">
+                    <div class="card-inner p-4 cursor-pointer">
+                        <h3 class="text-xl font-bold mb-2 text-center text-yellow-500">500+</h3>
+                        <p class="text-white/70" data-key="card_1">Minnatdor mijozlar Jamiyatimiz jadal rivojlanmoqda</p>
+                    </div>
+                </div>
+                <div class="card-premium p-6 reveal" data-aos="fade-up" data-aos-delay="160">
+                    <div class="card-inner p-4 cursor-pointer">
+                        <h3 class="text-xl font-bold mb-2 text-center text-yellow-500">100+</h3>
+                        <p class="text-white/70" data-key="card_2">Haftada mashg'ulotlar Har xil mashqlardan tanlang</p>
+                    </div>
+                </div>
+                <div class="card-premium p-6 reveal" data-aos="fade-up" data-aos-delay="240">
+                    <div class="card-inner p-4 cursor-pointer">
+                        <h3 class="text-xl font-bold mb-2 text-center text-yellow-500">99%</h3>
+                        <p class="text-white/70" data-key="card_3">Mijozlarning qoniqishi Biz sizning mamnunligingizni kafolatlaymiz</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-16" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-8 brand-gradient" data-key="services_title">Xizmatlarimiz</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-[#111111] rounded-xl hover:scale-[1.02] transition">
+                        <h4 class="font-semibold mb-2" data-key="service_1_title">Shaxsiy trening</h4>
+                        <p class="text-white/70" data-key="service_1_text">Shaxsiy murabbiy va o'qituvchi</p>
+                    </div>
+                    <div class="p-6 bg-[#111111] rounded-xl hover:scale-[1.02] transition">
+                        <h4 class="font-semibold mb-2" data-key="service_2_title">Guruh mashg'ulotlari</h4>
+                        <p class="text-white/70" data-key="service_2_text">Zumba, BodyPump, CrossFit va boshqalar.</p>
+                    </div>
+                    <div class="p-6 bg-[#111111] rounded-xl hover:scale-[1.02] transition">
+                        <h4 class="font-semibold mb-2" data-key="service_3_title">Wellness</h4>
+                        <p class="text-white/70" data-key="service_3_text">Dush, tiklanish xonalari.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prices" class="py-16 bg-[#0f0f0f]" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-center mb-8">
+                    <div class="glass rounded-full p-1 border border-white/10 inline-flex backdrop-blur-md">
+                        <button id="tabMen" class="px-6 py-2 rounded-full text-black bg-yellow-400 font-semibold hover:bg-yellow-300" data-key="tab_men">Erkaklar</button>
+                        <button id="tabWomen" class="px-6 py-2 rounded-full text-white/80 hover:bg-yellow-300 hover:text-white transition duration-300" data-key="tab_women">Ayollar</button>
+                    </div>
+                </div>
+
+                <div id="priceWrapper" class="relative transition-[height] duration-700 ease-[cubic-bezier(.22,1,.36,1)]">
+                    <div id="panelMen" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <h4 class="font-bold mb-2 text-center bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent text-[32px]" data-key="men_basic">1-Oy <span class="text-yellow-300 text-[23px]" data-key="men_basic_sub">har ikki kunda</span></h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">400 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <div class="mb-2 inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-300 text-black text-xs font-bold" data-key="popular">Eng ommabop</div>
+                                <h4 class="font-bold mb-2 text-yellow-500 text-[32px] text-center" data-key="men_vip">Vip</h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">600 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <h4 class="font-bold mb-2 text-center bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent text-[32px]" data-key="men_daily">Kunik</h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">50 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div id="panelWomen" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 hidden">
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <h4 class="font-bold mb-2 text-center bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent text-[32px]" data-key="women_basic">1-Oy <span class="text-yellow-300 text-[23px]" data-key="women_basic_sub">har ikki kunda</span></h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">300 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <div class="mb-2 inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-300 text-black text-xs font-bold" data-key="popular">Eng ommabop</div>
+                                <h4 class="font-bold mb-2 text-yellow-500 text-[32px] text-center" data-key="women_vip">Vip</h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">500 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                        <article class="card-premium reveal p-4 transition-transform duration-500 hover:-translate-y-2">
+                            <div class="shine"></div>
+                            <div class="card-inner p-6 flex flex-col h-full bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
+                                <h4 class="font-bold mb-2 text-center bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent text-[32px]" data-key="women_daily">Kunik</h4>
+                                <p class="text-3xl font-extrabold mb-3 text-center"><span class="brand-gradient">30 000</span> <span data-key="currency">so'm</span></p>
+                                <a href="#contact" class="btn-grad mt-6 inline-flex justify-center px-4 py-3 rounded-xl bg-yellow-400 text-black font-bold transition-all duration-300 hover:bg-yellow-300" data-key="buy">Sotib olish</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="mt-6 text-center text-xs text-white/60">
+                    <span id="autoDot" class="inline-block w-2 h-2 rounded-full bg-yellow-300 animate-pulse"></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="trainers" class="py-16" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-6" data-key="trainers_title">Murabbiylar</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-[#111111] p-6 rounded-xl hover:scale-[1.02] transition">
+                        <img src="./img/Trener.JPG" class="rounded-lg mb-4" alt="trainer" />
+                        <h4 class="font-semibold text-yellow-500" data-key="trainer_1_name">Bekjon Akbarov</h4>
+                        <p class="text-white/70" data-key="trainer_1_role">Fitness & Bodybuilding</p>
+                    </div>
+                    <div class="bg-[#111111] p-6 rounded-xl hover:scale-[1.02] transition">
+                        <img src="./img/trener-1.png" class="rounded-lg mb-4" alt="trainer" />
+                        <h4 class="font-semibold text-yellow-500" data-key="trainer_2_name">Qozoqboev Muxiddin</h4>
+                        <p class="text-white/70" data-key="trainer_2_role">Dzyudo bo'yicha sport ustaligiga nomzod fitnes murabbiyi tajribasi 4 yil</p>
+                    </div>
+                    <div class="bg-[#111111] p-6 rounded-xl hover:scale-[1.02] transition">
+                        <img src="./img/trener-2.png" class="rounded-lg mb-4" alt="trainer" />
+                        <h4 class="font-semibold text-yellow-500" data-key="trainer_3_name">Temur</h4>
+                        <p class="text-white/70" data-key="trainer_3_role">Fitness & Bodybuilding</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-16 bg-[#0f0f0f]" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-6xl mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-6" data-key="gallery_title">Bizning <span class="bg-gradient-to-r from-red-600 via-orange-400 to-yellow-400 bg-clip-text text-transparent">Sprot Zalimiz</span></h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img src="./img/Fit liga.webp" class="rounded-lg object-cover w-full h-40" />
+                    <img src="./img/Fit liga 3.webp" class="rounded-lg object-cover w-full h-40" />
+                    <img src="./img/Fit liga 2.webp" class="rounded-lg object-cover w-full h-40" />
+                    <img src="./img/Fit liga.webp" class="rounded-lg object-cover w-full h-40" />
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 bg-[#0f0f0f]" data-aos="fade-up" data-aos-duration="900">
+            <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+                <div>
+                    <div class="gradient text-white p-8 rounded-2xl shadow-lg w-full h-[500px] max-w-md">
+                        <h2 class="text-2xl font-bold text-center mb-6" data-key="contact_title">Xabar yuborish</h2>
+                        <form id="contactForm" class="space-y-4">
+                            <input type="text" id="name" placeholder="Sizning ismingiz" data-key="name_placeholder" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 text-black" required>
+                            <input type="tel" id="phone" placeholder="Telefon" data-key="phone_placeholder" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 text-black" required>
+                            <textarea id="message" placeholder="Xabar" data-key="message_placeholder" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 text-black" rows="4" required></textarea>
+                            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition" data-key="contact_button">Qayta qo'ng'iroq buyurtmasi</button>
+                        </form>
+                        <p id="status" class="mt-4 text-center text-sm"></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full h-[500px] rounded-xl overflow-hidden border border-white/6">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2997.9614273356224!2d69.20207239390723!3d41.28794394762851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDE3JzEzLjYiTiA2OcKwMTInMTQuMCJF!5e0!3m2!1sru!2s!4v1755695499794!5m2!1sru!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="bg-gradient-to-r from-yellow-400 to-yellow-300 text-black rounded-2xl p-8 text-center">
+                <h3 class="text-2xl font-bold" data-key="cta_title">Bugun boshlang — A'zolikni tanlang</h3>
+                <p class="mt-2 text-black/70" data-key="cta_text">Fitnes Liga bilan kuchga erishing.</p>
+                <a href="#prices" class="inline-block btn-grad mt-4 px-6 py-3 rounded-xl bg-black text-white border border-black/30" data-key="btn_abon">Abonementlarga o'tish</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#090909] border-t border-white/6 py-8">
+        <div class="footer-col max-w-7xl mx-auto px-4 grid md:flex-col gap-6 items-center">
+            <div>
+                <h4 class="font-bold brand-gradient text-lg" data-key="footer_brand">Fitnes Liga</h4>
+                <p class="text-white/60 text-sm mt-2" data-key="footer_copyright">© 2025 Fitnes Liga. Barcha huquqlar himoyalangan.</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold" data-key="footer_links_title">Tezkor havolalar</p>
+                <div class="flex gap-4 justify-center mt-2">
+                    <a href="#prices" class="text-white/60 hover:text-yellow-300" data-key="prices">Narxlar</a>
+                    <a href="#trainers" class="text-white/60 hover:text-yellow-300" data-key="trainers_title">Murabbiylar</a>
+                    <a href="#contact" class="text-white/60 hover:text-yellow-300" data-key="contact">Aloqa</a>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="font-semibold" data-key="footer_social_title">Ijtimoiy tarmoqlar</p>
+                <div class="flex gap-3 justify-end mt-2">
+                    <a href="https://www.instagram.com/fitness_liga_/" class="text-white/60 hover:text-yellow-300" data-key="social_instagram">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1050,
+            easing: 'ease-out-cubic',
+            once: false,
+            anchorPlacement: 'top-bottom',
+        });
+
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => io.observe(el));
+
+        const hamburger = document.getElementById('hamburger');
+        const mobilePanel = document.getElementById('mobilePanel');
+        let mobileOpen = false;
+        hamburger?.addEventListener('click', () => {
+            mobileOpen = !mobileOpen;
+            mobilePanel.classList.toggle('open', mobileOpen);
+            mobilePanel.classList.toggle('closed', !mobileOpen);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabMen = document.getElementById('tabMen');
+            const tabWomen = document.getElementById('tabWomen');
+            const panelMen = document.getElementById('panelMen');
+            const panelWomen = document.getElementById('panelWomen');
+            const wrapper = document.getElementById('priceWrapper');
+
+            let current = 'men';
+            let autoPlayInterval = null;
+
+            function measureHeight(el) {
+                const prevHidden = el.classList.contains('hidden');
+                if (prevHidden) {
+                    el.classList.remove('hidden');
+                    el.style.position = 'absolute';
+                    el.style.visibility = 'hidden';
+                    el.style.pointerEvents = 'none';
+                }
+                const h = el.scrollHeight;
+                if (prevHidden) {
+                    el.classList.add('hidden');
+                    el.style.position = '';
+                    el.style.visibility = '';
+                    el.style.pointerEvents = '';
+                }
+                return h;
+            }
+
+            function switchTo(target) {
+                if (current === target) return;
+
+                const showEl = (target === 'men') ? panelMen : panelWomen;
+                const hideEl = (target === 'men') ? panelWomen : panelMen;
+
+                const startH = wrapper.offsetHeight || measureHeight(hideEl);
+                const endH = measureHeight(showEl);
+
+                wrapper.style.position = 'relative';
+                wrapper.style.overflow = 'hidden';
+                wrapper.style.height = startH + 'px';
+
+                showEl.style.position = 'absolute';
+                showEl.style.top = '0';
+                showEl.style.left = '0';
+                showEl.style.width = '100%';
+                showEl.style.opacity = 0;
+                showEl.classList.remove('hidden');
+
+                hideEl.style.position = 'absolute';
+                hideEl.style.top = '0';
+                hideEl.style.left = '0';
+                hideEl.style.width = '100%';
+                hideEl.style.transition = 'opacity 0.5s ease';
+
+                requestAnimationFrame(() => {
+                    wrapper.style.transition = 'height 0.7s ease';
+                    wrapper.style.height = endH + 'px';
+                    hideEl.style.opacity = 0;
+                    showEl.style.transition = 'opacity 0.7s ease 0.1s';
+                    showEl.style.opacity = 1;
+                });
+
+                setTimeout(() => {
+                    hideEl.classList.add('hidden');
+                    hideEl.style.position = '';
+                    hideEl.style.opacity = '';
+                    hideEl.style.transition = '';
+                    hideEl.style.width = '';
+                    hideEl.style.top = '';
+                    hideEl.style.left = '';
+
+                    showEl.style.position = '';
+                    showEl.style.width = '';
+                    showEl.style.top = '';
+                    showEl.style.left = '';
+
+                    wrapper.style.height = 'auto';
+                    wrapper.style.position = '';
+                    wrapper.style.overflow = '';
+                    wrapper.style.transition = '';
+
+                    if (target === 'men') {
+                        tabMen.classList.add('bg-yellow-400', 'text-black');
+                        tabWomen.classList.remove('bg-yellow-400', 'text-black');
+                        tabWomen.classList.add('text-white/80');
+                    } else {
+                        tabWomen.classList.add('bg-yellow-400', 'text-black');
+                        tabMen.classList.remove('bg-yellow-400', 'text-black');
+                        tabMen.classList.add('text-white/80');
+                    }
+                    if (window.AOS) AOS.refreshHard();
+                    current = target;
+                }, 750);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay();
+                autoPlayInterval = setInterval(() => {
+                    const nextTarget = (current === 'men') ? 'women' : 'men';
+                    switchTo(nextTarget);
+                }, 4000);
+            }
+
+            tabMen.addEventListener('click', () => {
+                stopAutoPlay();
+                switchTo('men');
+            });
+
+            tabWomen.addEventListener('click', () => {
+                stopAutoPlay();
+                switchTo('women');
+            });
+
+            startAutoPlay();
+        });
+
+        const UZ_TEXT = {
+            site_title: "Fitnes Liga ",
+            meta_description: "Fitnes Liga  — Cheksiz tashriflar, trener bilan 1 ta sinov darsi, yoga darsi sovg'a. Premium dizayn, AOS animatsiya va mobil menyu.",
+            home: "Bosh sahifa",
+            about: "Biz haqimizda",
+            services: "Xizmatlar",
+            prices: "Narxlar",
+            contact: "Aloqa",
+            hero_title: "Premium Fitness tajribasi",
+            hero_sub: "Cheksiz tashriflar, trener bilan sinov darsi va yoga darsi — barchasi bir abonementda.",
+            btn_abon: "Abonementlar",
+            btn_services: "Xizmatlar",
+            about_title: "Biz haqimizda",
+            about_text: "<span class='text-yellow-500'>Fitnes Liga</span> — zamonaviy fitnes markazi. Biz sizga individual yondashuv, professional trenerlar va qulay infrastrukturani taklif qilamiz.",
+            card_1: "Minnatdor mijozlar Jamiyatimiz jadal rivojlanmoqda",
+            card_2: "Haftada mashg'ulotlar Har xil mashqlardan tanlang",
+            card_3: "Mijozlarning qoniqishi Biz sizning mamnunligingizni kafolatlaymiz",
+            services_title: "Xizmatlarimiz",
+            service_1_title: "Shaxsiy trening",
+            service_1_text: "Shaxsiy murabbiy va o'qituvchi",
+            service_2_title: "Guruh mashg'ulotlari",
+            service_2_text: "Zumba, BodyPump, CrossFit va boshqalar.",
+            service_3_title: "Wellness",
+            service_3_text: "Dush, tiklanish xonalari.",
+            tab_men: "Erkaklar",
+            tab_women: "Ayollar",
+            men_basic: "1-Oy",
+            men_basic_sub: "har ikki kunda",
+            men_vip: "Vip",
+            men_daily: "Kunik",
+            women_basic: "1-Oy",
+            women_basic_sub: "har ikki kunda",
+            women_vip: "Vip",
+            women_daily: "Kunik",
+            currency: "so'm",
+            popular: "Eng ommabop",
+            buy: "Sotib olish",
+            trainers_title: "Murabbiylar",
+            trainer_1_name: "Bekjon Akbarov",
+            trainer_1_role: "Fitness & Bodybuilding",
+            trainer_2_name: "Qozoqboev Muxiddin",
+            trainer_2_role: "Dzyudo bo'yicha sport ustaligiga nomzod fitnes murabbiyi tajribasi 4 yil",
+            trainer_3_name: "Temur",
+            trainer_3_role: "Fitness & Bodybuilding",
+            gallery_title: "Bizning <span class='bg-gradient-to-r from-red-600 via-orange-400 to-yellow-400 bg-clip-text text-transparent'>Sprot Zalimiz</span>",
+            contact_title: "Xabar yuborish",
+            name_placeholder: "Sizning ismingiz",
+            phone_placeholder: "Telefon",
+            message_placeholder: "Xabar",
+            contact_button: "Qayta qo'ng'iroq buyurtmasi",
+            cta_title: "Bugun boshlang — A'zolikni tanlang",
+            cta_text: "Fitnes Liga bilan kuchga erishing.",
+            footer_brand: "Fitnes Liga ",
+            footer_copyright: "© 2025 Fitnes Liga. Barcha huquqlar himoyalangan.",
+            footer_links_title: "Tezkor havolalar",
+            footer_social_title: "Ijtimoiy tarmoqlar",
+            social_instagram: "Instagram",
+            social_telegram: "",
+            social_facebook: "",
+            telegram_message: "📩 Yangi xabar:\n👤 Ism: {name}\n📞 Telefon: {phone}\n💬 Xabar: {message}",
+            success_message: "✅ Xabar yuborildi!",
+            error_message: "❌ Xatolik yuz berdi!"
+        };
+
+        const RU_TEXT = {
+            site_title: "Фитнес Лига — Премиум",
+            meta_description: "Фитнес Лига — Безлимитные посещения, пробное занятие с тренером, занятие йогой в подарок. Премиум-дизайн, AOS-анимация и мобильное меню.",
+            home: "Главная",
+            about: "О нас",
+            services: "Услуги",
+            prices: "Цены",
+            contact: "Контакты",
+            hero_title: "Премиум фитнес-опыт",
+            hero_sub: "Безлимитные посещения, пробное занятие с тренером и занятие йогой в подарок.",
+            btn_abon: "Абонементы",
+            btn_services: "Услуги",
+            about_title: "О нас",
+            about_text: "<span class='text-yellow-500'>Фитнес Лига</span> — современный фитнес-центр. Мы предлагаем индивидуальный подход, профессиональных тренеров и удобную инфраструктуру.",
+            card_1: "Довольных клиентов Наше сообщество стремительно растёт",
+            card_2: "Тренировок в неделю Выбирайте из множества упражнений",
+            card_3: "Удовлетворённость клиентов Мы гарантируем ваше удовлетворение",
+            services_title: "Наши услуги",
+            service_1_title: "Персональные тренировки",
+            service_1_text: "Персональный тренер и инструктор",
+            service_2_title: "Групповые занятия",
+            service_2_text: "Зумба, BodyPump, CrossFit и другие.",
+            service_3_title: "Велнес",
+            service_3_text: "Душ, зоны восстановления.",
+            tab_men: "Мужчины",
+            tab_women: "Женщины",
+            men_basic: "1 месяц",
+            men_basic_sub: "через день",
+            men_vip: "Вип",
+            men_daily: "Дневной",
+            women_basic: "1 месяц",
+            women_basic_sub: "через день",
+            women_vip: "Вип",
+            women_daily: "Дневной",
+            currency: "сум",
+            popular: "Самый популярный",
+            buy: "Купить",
+            trainers_title: "Тренеры",
+            trainer_1_name: "Бекжон Акбаров",
+            trainer_1_role: "Фитнес и бодибилдинг",
+            trainer_2_name: "Козокбоев Мухиддин",
+            trainer_2_role: "Мастер спорт по дзюдо фитнис тренер стаж 4 года",
+            trainer_3_name: "Темур",
+            trainer_3_role: "Фитнес и бодибилдинг",
+            gallery_title: "Наш <span class='bg-gradient-to-r from-red-600 via-orange-400 to-yellow-400 bg-clip-text text-transparent'>Спортивный Зал</span>",
+            contact_title: "Отправить сообщение",
+            name_placeholder: "Ваше имя",
+            phone_placeholder: "Телефон",
+            message_placeholder: "Сообщение",
+            contact_button: "Заказать обратный звонок",
+            cta_title: "Начните сегодня — Выберите членство",
+            cta_text: "Достигайте силы с Фитнес Лига.",
+            footer_brand: "Фитнес Лига",
+            footer_copyright: "© 2025 Фитнес Лига. Все права защищены.",
+            footer_links_title: "Быстрые ссылки",
+            footer_social_title: "Социальные сети",
+            social_instagram: "Инстаграм",
+            social_telegram: "Телеграм",
+            social_facebook: "Фейсбук",
+            telegram_message: "📩 Новое сообщение:\n👤 Имя: {name}\n📞 Телефон: {phone}\n💬 Сообщение: {message}",
+            success_message: "✅ Сообщение отправлено!",
+            error_message: "❌ Произошла ошибка!"
+        };
+
+        const buttons = document.querySelectorAll('.lang-btn');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        function setLang(obj) {
+            // Update text content
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (key in obj) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = obj[key];
+                    } else if (key === 'hero_title' || key === 'about_text' || key === 'gallery_title') {
+                        el.innerHTML = obj[key];
+                    } else {
+                        el.textContent = obj[key];
+                    }
+                }
+            });
+            // Update title and meta description
+            document.title = obj.site_title;
+            document.querySelector('meta[name="description"]').setAttribute('content', obj.meta_description);
+        }
+
+        document.getElementById('btnUZ')?.addEventListener('click', () => setLang(UZ_TEXT));
+        document.getElementById('btnRU')?.addEventListener('click', () => setLang(RU_TEXT));
+        document.getElementById('btnUZ_mobile')?.addEventListener('click', () => setLang(UZ_TEXT));
+        document.getElementById('btnRU_mobile')?.addEventListener('click', () => setLang(RU_TEXT));
+        document.getElementById('btnUZ_m')?.addEventListener('click', () => setLang(UZ_TEXT));
+        document.getElementById('btnRU_m')?.addEventListener('click', () => setLang(RU_TEXT));
+
+        const tabMen = document.getElementById('tabMen');
+        const tabWomen = document.getElementById('tabWomen');
+        [tabMen, tabWomen].forEach(btn => {
+            btn.setAttribute('role', 'tab');
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+            });
+        });
+
+        setLang(UZ_TEXT);
+
+        const botToken = "8375649398:AAGQHPXnvnX3ev7EcQEOBRf6vcx_n46iQCA";
+        const chatId = "-1003060080209";
+
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const message = document.getElementById("message").value;
+            const currentLang = document.querySelector('.lang-btn.active').textContent;
+            const text = currentLang === 'UZ'
+                ? UZ_TEXT.telegram_message.replace('{name}', name).replace('{phone}', phone).replace('{message}', message)
+                : RU_TEXT.telegram_message.replace('{name}', name).replace('{phone}', phone).replace('{message}', message);
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: "HTML"
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const status = document.getElementById("status");
+                    status.textContent = currentLang === 'UZ' ? UZ_TEXT.success_message : RU_TEXT.success_message;
+                    status.classList.add("text-green-400");
+                    document.getElementById("contactForm").reset();
+                })
+                .catch(err => {
+                    const status = document.getElementById("status");
+                    status.textContent = currentLang === 'UZ' ? UZ_TEXT.error_message : RU_TEXT.error_message;
+                    status.classList.add("text-red-400");
+                });
+        });
+    </script>
+</body>
+
+</html>
